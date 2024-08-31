@@ -24,7 +24,7 @@ def home():
     Returns:
         _type_: String type
     """
-    return render_template('', posts=posts)
+    return render_template('home.html', posts=posts)
 @app.route('/about')
 def about():
     """_summary_
