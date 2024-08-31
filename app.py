@@ -3,7 +3,19 @@
 """
 from  flask import Flask, render_template
 app = Flask(__name__)
-posts = "helook"
+posts = [
+    {
+        'author': 'John Doe',
+        'title': 'Blog Post 1',
+        'content': 'First post on YouTweet',
+        'date_posted': 'April 20, 2020'
+    },
+    {
+        'author': 'Jane Smith',
+        'title': 'Blog Post 2',
+        'content': 'Second post on YouTweet',
+        'date_posted': 'April 20, 2020'
+    }]
 @app.route('/')
 @app.route('/home')
 def home():
