@@ -1,14 +1,16 @@
-<!doctype html>
+{% extends "layout.html" %}
+{% block content %}
+<h1>Welcome to Home page!</h1>
 
-    <h1>Welcome to Home page!</h1>
-    
-    {% for post in posts %}
-    <div class="post">
-        <h2>{{ post.title }}</h2>
-        <p>By {{ post.author }} on {{ post.date_posted }}</p>
-        <p>{{ post.content }}</p>
-    </div>
-    {% endfor %}
+{% for post in posts %}
+<div class="post">
+    <h2>{{ post.title }}</h2>
+    <p>By {{ post.author }} on {{ post.date_posted }}</p>
+    <p>{{ post.content }}</p>
+</div>
+{% endfor %}
+{% endblock content %}
+
 
 
 
