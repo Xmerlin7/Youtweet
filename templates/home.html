@@ -1,4 +1,18 @@
 <!doctype html>
-<title>Youtweet</title>
+
+    {% if title %}
+    <title>YouTweet - {{ title }} </title>
+    {% else %}
+    <title>YouTweet </title>
+    {% endif %}
+
+
 <h1 style="margin: 0;">Welcome to Home page!</h1>
-<h1 style="margin: 0;">{{ posts }}</h1>
+
+{% for post in posts %}
+    <div style="margin-bottom: 20px;">
+        <h2>{{ post.title }}</h2>
+        <p>By {{ post.author }} on {{ post.date_posted }}</p>
+        <p>{{ post.content }}</p>
+    </div>
+{% endfor %}

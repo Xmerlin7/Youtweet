@@ -24,7 +24,7 @@ def home():
     Returns:
         _type_: String type
     """
-    return render_template('home.html', posts=posts)
+    return render_template('', posts=posts)
 @app.route('/about')
 def about():
     """_summary_
@@ -32,7 +32,7 @@ def about():
     Returns:
         _type_: _description_
     """
-    return "<h1>Welcome to the About Page!</h1>"
+    return render_template('about.html', title='About')
 @app.route('/contact')
 def contact():
     return "<h1>Welcome to the Contact Page!</h1>"
