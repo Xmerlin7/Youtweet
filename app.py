@@ -49,7 +49,7 @@ def register():
     return render_template('register.html', title='Register', form=form)
 
 @app.route('/login', methods=['GET', 'POST'])
-def Login():
+def login():
     form = LoginForm()
     if form.validate_on_submit():
         if form.email.data == 'admin@example.com' and form.password.data == 'password123':
