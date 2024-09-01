@@ -28,6 +28,9 @@ def home():
         _type_: String type
     """
     return render_template('home.html', posts=posts)
+
+#? GET:  Typically used to display the registration form to the user.
+#? POST: Used to submit the registration form data to the server.
 @app.route('/about')
 def about():
     """_summary_
@@ -36,9 +39,26 @@ def about():
         _type_: _description_
     """
     return render_template('about.html', title='About')
-@app.route('/contact')
-def contact():
-    return "<h1>Welcome to the Contact Page!</h1>"
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        flash(f'Registration successful for {form.username.data}', 'success')
+        return redirect(url_for('home'))
+    return render_template('register.html', title='Register', form=form)
+
+@app.route('/login', methods=['GET', 'POST'])
+def Login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        if form.email.data == 'admin@example.com' and form.password.data == 'password123':
+            flash('Login successful!', 'success')
+            return redirect(url_for('home'))
+        else:
+            flash('Login failed! Please check your email and password.', 'danger')
+    return render_template('login.html', title='Login', form=form)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
