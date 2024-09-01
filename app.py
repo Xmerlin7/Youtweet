@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """_summary_: all project Imports will be added here
 """
-from  flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, flash, redirect
+from validator import RegistrationForm, LoginForm
 app = Flask(__name__)
 posts = [
     {
