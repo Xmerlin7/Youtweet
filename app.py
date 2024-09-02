@@ -1,11 +1,31 @@
 #!/usr/bin/env python3
 """_summary_: all project Imports will be added here
 """
+from datetime import datetime
 from flask import Flask, render_template, url_for, flash, redirect
 from validator import RegistrationForm, LoginForm
+from flask_sqlalchemy import SQLAlchemy
+
 app = Flask(__name__)
 #! token = secrets.token_hex(16)
 app.config['SECRET_KEY'] = '53665e59e6730130595ea71c41e3eecd'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+db = SQLAlchemy(app)
+
+class User(db.Model):
+    id = db.Column(db.Integer, PrimaryKey = True)
+    username = db.Column(db.String(20), unique = True, nullable=False)
+    email = db.Column(db.String(120), unique= True, nullable=False)
+    image_file = db.Column(db.String(20), nullable=False, default = 'default_image.jpg')
+    password = db.Column(db.String(60), nullable=False)
+    posts = db.relationship('Post', backref='author', lazy = True)
+
+class Post(db.Model):
+    id = db.Column(db.Integer, PrimaryKey = True)
+    title = db.Column(db.String(100), nullable=False)
+    content = db.Column(db.Text, nullable=False)
+    date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 posts = [
     {
         'author': 'John Doe',
