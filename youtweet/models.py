@@ -2,7 +2,7 @@
 """_summary_: all project Imports will be added here
 """
 from datetime import datetime
-from __main__ import db
+from youtweet import db
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
