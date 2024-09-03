@@ -1,5 +1,5 @@
 from flask import render_template, url_for, flash, redirect
-from youtweet.validator import RegistrationForm, LoginForm
+from youtweet.forms import RegistrationForm, LoginForm
 from youtweet.models import User, Post
 from youtweet import app
 
