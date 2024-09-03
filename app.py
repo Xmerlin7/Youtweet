@@ -3,16 +3,16 @@
 """
 from datetime import datetime
 from flask import Flask, render_template, url_for, flash, redirect
-from validator import RegistrationForm, LoginForm
+from youtweet.validator import RegistrationForm, LoginForm
 from flask_sqlalchemy import SQLAlchemy
-from models import User, Post
+
 
 app = Flask(__name__)
 #! token = secrets.token_hex(16)
 app.config['SECRET_KEY'] = '53665e59e6730130595ea71c41e3eecd'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 db = SQLAlchemy(app)
-
+from youtweet.models import User, Post
 
 posts = [
     {
