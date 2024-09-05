@@ -16,14 +16,15 @@ posts = [
         'content': 'Second post on YouTweet',
         'date_posted': 'April 20, 2020'
     }]
-@app.route('/')
-@app.route('/home')
+@app.route('/', methods=['GET', 'POST'])
+@app.route('/home',  methods=['GET', 'POST'])
 def home():
     """_summary_:
 
     Returns:
         _type_: String type
     """
+    
     return render_template('home.html', posts=posts)
 
 #? GET:  Typically used to display the registration form to the user.
@@ -39,7 +40,7 @@ def about():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    if current_user.is_authenticated():
+    if current_user.is_authenticated:
         return redirect(url_for('home'))
     form = RegistrationForm()
     if form.validate_on_submit():
@@ -53,6 +54,8 @@ def register():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
@@ -64,8 +67,10 @@ def login():
             flash('Login failed! Please check your email and password.', 'danger')
     return render_template('login.html', title='Login', form=form)
 
-@app.route('/logut')
+@app.route('/logout')
 def logout():
     logout_user()
-    flash('You have been logged out!', 'success')
-    return redirect(url_for('home'))
+    flash('You have been logged out!', 'info')
+    return redirect(url_for('login'))
+
+   
