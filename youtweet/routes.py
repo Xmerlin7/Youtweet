@@ -73,4 +73,6 @@ def logout():
     flash('You have been logged out!', 'info')
     return redirect(url_for('login'))
 
-   
+@app.route('/account')
+def account():
+    return render_template('account.html')
