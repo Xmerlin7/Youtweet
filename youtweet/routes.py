@@ -2,7 +2,7 @@ from flask import render_template, url_for, flash, redirect
 from youtweet.forms import RegistrationForm, LoginForm
 from youtweet.models import User
 from youtweet import app, db, bcrypt
-
+from flask_login import login_user, logout_user, current_user
 posts = [
     {
         'author': 'John Doe',
@@ -39,6 +39,8 @@ def about():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    if current_user.is_authenticated():
+        return redirect(url_for('home'))
     form = RegistrationForm()
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
@@ -53,9 +55,17 @@ def register():
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        if form.email.data == 'admin@example.com' and form.password.data == 'password123':
+        user = User.query.filter_by(email=form.email.data).first()
+        if user and bcrypt.check_password_hash(user.password, form.password.data):
+            login_user(user, remember =form.remember.data)
             flash('Login successful!', 'success')
             return redirect(url_for('home'))
         else:
             flash('Login failed! Please check your email and password.', 'danger')
     return render_template('login.html', title='Login', form=form)
+
+@app.route('/logut')
+def logout():
+    logout_user()
+    flash('You have been logged out!', 'success')
+    return redirect(url_for('home'))
