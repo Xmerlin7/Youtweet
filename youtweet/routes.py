@@ -116,8 +116,17 @@ def new_post():
         return redirect (url_for('home'), posts = post)
     return render_template('create_post.html', title = 'New Post', form=form, legend =legend)
 
-@app.route("post/<int:post_id>", methods=['GET', 'POST'])
-@login_required
-def post():
+@app.route("/post/<int:post_id>", methods=['GET', 'POST'])
+def post(post_id):
+    post = Post.query.get_or_404(post_id)
+    return render_template('post.html', title=post.title, post=post)
+
+@app.route("/post/<int:post_id>", methods=['GET', 'POST'])
+def update_post(post_id):
+    post = Post.query.get_or_404(post_id)
+    return render_template('post.html', title=post.title, post=post)
+
+@app.route("/post/<int:post_id>/delete", methods=['GET', 'POST'])
+def delete_post(post_id):
     post = Post.query.get_or_404(post_id)
     return render_template('post.html', title=post.title, post=post)
