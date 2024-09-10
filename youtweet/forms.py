@@ -51,8 +51,13 @@ class UpdateAccountForm(FlaskForm):
             user = User.query.filter_by(email=email.data).first()
             if user:
                 raise ValidationError('email already exists. Please choose a different one.')
-            
 class CreateNewPost(FlaskForm):
-    title = StringField('title', validators=[DataRequired()])
-    content = TextAreaField('content', validators=[DataRequired()])
+    title = StringField('Title', validators=[DataRequired()])
+    content = TextAreaField('Content', validators=[DataRequired()])
     submit = SubmitField('Post')
+
+    #?This constructio changes the default 'Post' field when Updating
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        if 'submit_label' in kwargs:
+            self.submit.label.text = kwargs['submit_label']

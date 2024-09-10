@@ -3,7 +3,7 @@ import secrets
 from PIL import Image
 from youtweet import app, db, bcrypt
 from youtweet.models import User, Post
-from flask import render_template, url_for, flash, redirect, request
+from flask import render_template, url_for, flash, redirect, request, abort
 from flask_login import login_user, logout_user, login_required ,current_user
 from youtweet.forms import RegistrationForm, LoginForm, UpdateAccountForm, CreateNewPost
 
@@ -105,7 +105,7 @@ def account():
 @login_required
 def new_post():
     form = CreateNewPost()
-    legend = 'New_Post' 
+    legend = 'New Post' 
     if form.validate_on_submit():
         post = Post(title=form.title.data, content=form.content.data, author=current_user)
         db.session.add(post)
@@ -121,12 +121,31 @@ def post(post_id):
     post = Post.query.get_or_404(post_id)
     return render_template('post.html', title=post.title, post=post)
 
-@app.route("/post/<int:post_id>", methods=['GET', 'POST'])
+@app.route("/post/<int:post_id>/update", methods=['GET', 'POST'])
 def update_post(post_id):
+    legend = 'Update Post'
     post = Post.query.get_or_404(post_id)
-    return render_template('post.html', title=post.title, post=post)
+    if post.author != current_user:
+        abort(403)
+    form = CreateNewPost()
+    form = CreateNewPost(submit_label='Update') 
+    if form.validate_on_submit():
+        post.title = form.title.data
+        post.content = form.content.data
+        db.session.commit()
+        flash('Your post has been updated!', 'success')
+        return redirect(url_for('post', post_id=post.id))
+    elif request.method == 'GET':
+        form.title.data = post.title
+        form.content.data = post.content
+    return render_template('create_post.html', title='Update Post',
+                           form=form, legend='Update Post')
 
-@app.route("/post/<int:post_id>/delete", methods=['GET', 'POST'])
+@app.route("/post/<int:post_id>/delete", methods=['POST'])
 def delete_post(post_id):
     post = Post.query.get_or_404(post_id)
-    return render_template('post.html', title=post.title, post=post)
+    if post.author != current_user:
+        abort(403)
+    db.session.delete(post)
+    db.session.commit()
+    return redirect (url_for('home'))
