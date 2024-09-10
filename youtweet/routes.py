@@ -1,11 +1,12 @@
 import os
 import secrets
 from PIL import Image
-from flask import render_template, url_for, flash, redirect, request
-from youtweet.forms import RegistrationForm, LoginForm, UpdateAccountForm, CreateNewPost
-from youtweet.models import User, Post
 from youtweet import app, db, bcrypt
+from youtweet.models import User, Post
+from flask import render_template, url_for, flash, redirect, request
 from flask_login import login_user, logout_user, login_required ,current_user
+from youtweet.forms import RegistrationForm, LoginForm, UpdateAccountForm, CreateNewPost
+
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/home',  methods=['GET', 'POST'])
@@ -15,7 +16,7 @@ def home():
     Returns:
         _type_: String type
     """
-    
+    posts = Post.query.all()
     return render_template('home.html', posts=posts)
 
 #? GET:  Typically used to display the registration form to the user.
