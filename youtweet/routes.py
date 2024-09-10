@@ -2,23 +2,11 @@ import os
 import secrets
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request
-from youtweet.forms import RegistrationForm, LoginForm, UpdateAccountForm
-from youtweet.models import User
+from youtweet.forms import RegistrationForm, LoginForm, UpdateAccountForm, CreateNewPost
+from youtweet.models import User, Post
 from youtweet import app, db, bcrypt
 from flask_login import login_user, logout_user, login_required ,current_user
-posts = [
-    {
-        'author': 'John Doe',
-        'title': 'Blog Post 1',
-        'content': 'First post on YouTweet',
-        'date_posted': 'April 20, 2020'
-    },
-    {
-        'author': 'Jane Smith',
-        'title': 'Blog Post 2',
-        'content': 'Second post on YouTweet',
-        'date_posted': 'April 20, 2020'
-    }]
+
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/home',  methods=['GET', 'POST'])
 def home():
@@ -110,3 +98,19 @@ def account():
     image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
     return render_template('account.html', title='Account',
                            image_file=image_file, form=form)
+
+
+@app.route("/posts/new", methods=['GET', 'POST'])
+@login_required
+def new_post():
+    form = CreateNewPost()
+    legend = 'New_Post' 
+    if form.validate_on_submit():
+        post = Post(title=form.title.data, content=form.content.data, author=current_user)
+        db.session.add(post)
+        db.session.commit()
+        return redirect(url_for('home'))
+    if form.validate_on_submit():
+        flash('Your Post has been added!', 'success')
+        return redirect (url_for('home'), posts = post)
+    return render_template('create_post.html', title = 'New Post', form=form, legend =legend)
