@@ -16,7 +16,8 @@ def home():
     Returns:
         _type_: String type
     """
-    posts = Post.query.all()
+    page = request.args.get('page', 1, type=int)
+    posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=5)
     return render_template('home.html', posts=posts)
 
 #? GET:  Typically used to display the registration form to the user.
@@ -100,7 +101,6 @@ def account():
     return render_template('account.html', title='Account',
                            image_file=image_file, form=form)
 
-
 @app.route("/posts/new", methods=['GET', 'POST'])
 @login_required
 def new_post():
@@ -149,3 +149,12 @@ def delete_post(post_id):
     db.session.delete(post)
     db.session.commit()
     return redirect (url_for('home'))
+
+@app.route("/user/<string:username>")
+def user_posts(username):
+    page = request.args.get('page', 1, type=int)
+    user = User.query.filter_by(username=username).first_or_404()
+    posts = Post.query.filter_by(author=user)\
+        .order_by(Post.date_posted.desc())\
+        .paginate(page=page, per_page=5)
+    return render_template('user_posts.html', posts=posts, user=user)
