@@ -1,144 +1,148 @@
 /* Navbar Styles */
-/* Navbar Styles */
 .site-header {
-    background: #34495e; /* Cool, dark blue-gray color */
-    padding: 0.5rem 1.5rem; /* Reduced padding for a slimmer navbar */
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    position: fixed;
-    width: 100%;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-  }
-  
-  .site-header .navbar-brand {
-    color: #ecf0f1; /* Light color for brand text */
-    font-size: 1.6rem; /* Slightly smaller font size */
-    font-weight: 700; /* Bold for emphasis */
-    text-transform: uppercase; /* Uppercase for modern style */
-    letter-spacing: 0.5px; /* Tight letter spacing */
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Subtle text shadow */
-    margin-right: auto; /* Push brand text to the left */
-  }
-  
-  .site-header .navbar-nav {
-    display: flex; /* Align nav items horizontally */
-    align-items: center; /* Center align items vertically */
-  }
-  
-  .site-header .navbar-nav .nav-link {
-    color: #bdc3c7; /* Light color for nav links */
-    font-size: 0.9rem; /* Slightly smaller font size */
-    margin: 0 1rem; /* Reduced margin between links */
-    padding: 8px 12px; /* Reduced padding for links */
-    transition: color 0.3s ease, background-color 0.3s ease; /* Smooth transitions */
-    position: relative; /* For pseudo-elements */
-    text-decoration: none; /* Remove underline */
-    border-radius: 4px; /* Slightly rounded corners for hover effect */
-  }
-  
-  .site-header .navbar-nav .nav-link:hover {
-    color: #ffffff; /* Bright color on hover */
-    background-color: rgba(255, 255, 255, 0.2); /* Subtle background color on hover */
-  }
-  
-  .site-header .navbar-nav .nav-link.active {
-    color: #ffffff; /* Color for active link */
-    font-weight: 600; /* Semi-bold font weight for active link */
-    background-color: rgba(255, 255, 255, 0.3); /* Subtle background for active link */
-  }
-  
-  /* Mobile Responsive Styles */
-  @media (max-width: 768px) {
-    .site-header .navbar-nav {
-      flex-direction: column; /* Stack links vertically on mobile */
-      align-items: flex-start; /* Align links to the left */
-    }
-  
-    .site-header .navbar-nav .nav-link {
-      margin: 0.5rem 0; /* Adjust margin for vertical stack */
-      padding: 10px 15px; /* Adjust padding for mobile */
-    }
-  }
-  
+  background: #34495e; /* Cool dark blue-gray */
+  padding: 0.5rem 1.5rem;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+}
 
-body {
-    background: #fafafa;
-    color: #333333;
-    margin-top: 5rem;
+.site-header .navbar-brand {
+  color: #ecf0f1; /* Light brand color */
+  font-size: 1.6rem;
+  font-weight: bold;
+  text-transform: uppercase; /* Modern, bold style */
+  letter-spacing: 0.5px; /* Improved readability */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Subtle text shadow */
+  margin-right: auto;
+}
+
+.site-header .navbar-nav {
+  display: flex;
+  align-items: center;
+}
+
+.site-header .navbar-nav .nav-link {
+  color: #bdc3c7; /* Light link color */
+  font-size: 0.9rem;
+  margin: 0 1rem;
+  padding: 8px 12px;
+  transition: color 0.3s ease, background-color 0.3s ease; /* Smooth transition */
+  border-radius: 4px; /* Rounded corners for hover */
+}
+
+.site-header .navbar-nav .nav-link:hover {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.2); /* Soft hover background */
+}
+
+.site-header .navbar-nav .nav-link.active {
+  color: #ffffff;
+  font-weight: 600;
+  background-color: rgba(255, 255, 255, 0.3); /* Highlight active link */
+}
+
+/* Responsive Navbar for Mobile */
+@media (max-width: 768px) {
+  .site-header .navbar-nav {
+      flex-direction: column; /* Stack links vertically */
+      align-items: flex-start;
   }
-  
-  h1, h2, h3, h4, h5, h6 {
-    color: #444444;
-  }
-  
-  .bg-steel {
-    background-color: #5f788a;
-  }
-  
+
   .site-header .navbar-nav .nav-link {
-    color: #cbd5db;
+      margin: 0.5rem 0; /* Adjust spacing */
+      padding: 10px 15px;
   }
-  
-  .site-header .navbar-nav .nav-link:hover {
-    color: #ffffff;
-  }
-  
-  .site-header .navbar-nav .nav-link.active {
-    font-weight: 500;
-  }
-  
-  .content-section {
-    background: #ffffff;
-    padding: 10px 20px;
-    border: 1px solid #dddddd;
-    border-radius: 3px;
-    margin-bottom: 20px;
-  }
-  
-  .article-title {
-    color: #444444;
-  }
-  
-  a.article-title:hover {
-    color: #428bca;
-    text-decoration: none;
-  }
-  
-  .article-content {
-    white-space: pre-line;
-  }
-  
-  .article-img {
-    height: 65px;
-    width: 65px;
-    margin-right: 16px;
-  }
-  
-  .article-metadata {
-    padding-bottom: 1px;
-    margin-bottom: 4px;
-    border-bottom: 1px solid #e3e3e3
-  }
-  
-  .article-metadata a:hover {
-    color: #333;
-    text-decoration: none;
-  }
-  
-  .article-svg {
-    width: 25px;
-    height: 25px;
-    vertical-align: middle;
-  }
-  
-  .account-img {
-    height: 125px;
-    width: 125px;
-    margin-right: 20px;
-    margin-bottom: 16px;
-  }
-  
-  .account-heading {
-    font-size: 2.5rem;
-  }
+}
+
+/* General Body Styles */
+body {
+  background: #fafafa; /* Light background */
+  color: #333333; /* Darker text for readability */
+  margin-top: 5rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #444444;
+}
+
+.bg-steel {
+  background-color: #5f788a; /* Steel blue color */
+}
+
+/* Content Section Styling */
+.content-section {
+  background: #ffffff;
+  padding: 10px 20px;
+  border: 1px solid #dddddd;
+  border-radius: 3px;
+  margin-bottom: 20px;
+}
+
+/* Article Styles */
+.article-title {
+  color: #444444;
+}
+
+a.article-title:hover {
+  color: #428bca; /* Blue highlight on hover */
+  text-decoration: none;
+}
+
+.article-content {
+  white-space: pre-line; /* Preserve line breaks */
+}
+
+.article-img {
+  height: 65px;
+  width: 65px;
+  margin-right: 16px;
+}
+
+.article-metadata {
+  padding-bottom: 1px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid #e3e3e3;
+}
+
+.article-metadata a:hover {
+  color: #333;
+  text-decoration: none;
+}
+
+.article-svg {
+  width: 25px;
+  height: 25px;
+  vertical-align: middle;
+}
+
+/* Account Section */
+.account-img {
+  height: 125px;
+  width: 125px;
+  margin-right: 20px;
+  margin-bottom: 16px;
+}
+
+.account-heading {
+  font-size: 2.5rem;
+}
+
+/* Footer (if needed) */
+footer {
+  background-color: #34495e;
+  color: #ecf0f1;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+footer a {
+  color: #bdc3c7;
+  text-decoration: none;
+}
+
+footer a:hover {
+  color: #ffffff;
+}
