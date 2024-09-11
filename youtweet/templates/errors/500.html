@@ -1,7 +1,9 @@
 {% extends "layout.html" %}
 {% block content %}
-    <div class="content-section">
-        <h1>Something went wrong (500)</h1>
-        <p>We're experiencing some trouble on our end. Please try again in the near future</p>
+    <div class="content-section text-center" style="padding: 50px; background-color: #f8f9fa; border-radius: 10px;">
+        <h1 class="display-4" style="color: #dc3545;">500 - Internal Server Error</h1>
+        <p class="lead" style="margin-top: 20px;">Oops! Something went wrong on our end.</p>
+        <p class="text-muted">We're working to resolve the issue. Please try again later, or contact support if the problem persists.</p>
+        <a href="{{ url_for('home') }}" class="btn btn-primary btn-lg mt-3">Return to Home</a>
     </div>
 {% endblock content %}

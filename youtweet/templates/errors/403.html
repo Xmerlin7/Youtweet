@@ -1,7 +1,9 @@
 {% extends "layout.html" %}
 {% block content %}
-    <div class="content-section">
-        <h1>You don't have permission to do that (403)</h1>
-        <p>Please check your account and try again</p>
+    <div class="content-section text-center" style="padding: 50px; background-color: #f8f9fa; border-radius: 10px;">
+        <h1 class="display-4" style="color: #dc3545;">403 - Access Denied</h1>
+        <p class="lead" style="margin-top: 20px;">You don't have permission to access this page.</p>
+        <p class="text-muted">If you believe this is a mistake, please check your account or contact support.</p>
+        <a href="{{ url_for('home') }}" class="btn btn-primary btn-lg mt-3">Return to Home</a>
     </div>
 {% endblock content %}

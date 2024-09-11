@@ -171,3 +171,8 @@ def forbidden(error):
 @app.errorhandler(500)
 def internal_server_error(error):
     return render_template('errors/500.html'), 500
+
+@app.route('/cause-500-error')
+def cause_500_error():
+    # This will trigger a 500 error
+    raise Exception("Intentional 500 error for testing")
